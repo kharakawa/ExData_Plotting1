@@ -2,7 +2,7 @@
 # Draw four time series charts in one canvas.
 
 # set locale
-Sys.setlocale(locale="en_US.UTF-8")
+lc = Sys.setlocale(locale="en_US.UTF-8")
 
 # read whole data from file
 data = read.table('household_power_consumption.txt',
@@ -10,6 +10,9 @@ data = read.table('household_power_consumption.txt',
 
 # subset specific rows
 data = data[data$Date %in% c('1/2/2007', '2/2/2007'),]
+
+# set DateTime column
+data$DateTime = strptime(paste(data$Date, data$Time), "%d/%m/%Y %H:%M:%S")
 
 # open png device and write a chart into it.
 png = png('plot4.png', width=480, height=480, bg="transparent")
@@ -20,7 +23,7 @@ par(mfcol=c(2, 2))
 # first plot
 with(data,
      plot(DateTime, Global_active_power, type='l',
-          ylab="Global Active Power (kilowatts)", xlab=""))
+          ylab="Global Active Power", xlab=""))
 
 # second plot
 with(data,

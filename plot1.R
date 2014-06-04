@@ -2,7 +2,7 @@
 # Draw a histgram of Global active power.
 
 # set locale
-Sys.setlocale(locale="en_US.UTF-8")
+lc = Sys.setlocale(locale="en_US.UTF-8")
 
 # read whole data from file
 data = read.table('household_power_consumption.txt',
